@@ -438,6 +438,59 @@ $endif$
 $endif$
 
 \begin{document}
+
+%% Mandatory proefschrift page for Leiden PhD dissertations %%
+$if(proefschrift)$
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+\Huge\textbf{$title$}\par
+\vspace{\baselineskip}
+\huge\textit{$subtitle$}\par
+\vfill % this space will be whatever is left on the page
+    \Large{Proefschrift}\par
+    \vspace{\baselineskip}
+    \linespread{1.3}
+    \large{ter verkrijging van \\
+    de graad van Doctor aan de Universiteit Leiden, \\
+    op gezag van Rector Magnificus $proefschrift.rector$, \\
+    volgens besluit van het College voor Promoties \\
+    te verdedigen op $proefschrift.day$ $proefschrift.date$ \\
+    klokke $time$ uur \\[1.5cm]
+    door} \\[1.5cm]
+    \Large{$author$}\par
+    \vspace{\baselineskip}
+    \large{geboren te $proefschrift.birthplace$ \\
+    in $proefschrift.birthyear$}
+\end{center}
+$endif$
+%% End: Proefschrift %%
+
+%% Promotor and committee page %%
+\clearpage
+\thispagestyle{empty}
+
+\noindent\begin{tabular}{p{8em} l}
+    \large
+    \textbf{Promotor} $for(promotor)$ & \large $promotor.name$ $if(promotor.affiliation)$($copromotor.affiliation$)$endif$ \\ $endfor$
+    \rule{0pt}{4ex}\large\textbf{Co-Promotor} $for(copromotor)$ & \large $copromotor.name$ $if(copromotor.affiliation)$ \\
+    & \indent\textit{$copromotor.affiliation$}$endif$ \\ $endfor$
+    \large
+    \rule{0pt}{8ex}\textbf{Committee} $for(committee)$ & \rule{0pt}{4ex}\large $committee.name$ $if(committee.affiliation)$ \\
+    & \indent\textit{$committee.affiliation$}$endif$ \\ $endfor$
+\end{tabular}
+
+\begingroup
+\hspace{0.000001cm}
+\vfill
+\begin{flushleft}
+\line(1,0){225} \\ %%%% Change colour of line to match chapters %%%%
+\textbf{Front cover image:} $cover-caption$ \\[0.5cm]
+$if(funding)$\textbf{Funding:} $funding$ $endif$
+\end{flushleft}
+\endgroup
+%% End: promotor and committee page %%
+
 $if(has-frontmatter)$
 \frontmatter
 $endif$
