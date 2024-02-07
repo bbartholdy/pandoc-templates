@@ -459,9 +459,11 @@ $if(proefschrift)$
     klokke $time$ uur \\[1.5cm]
     door} \\[1.5cm]
     \Large{$author$}\par
+$if(proefschrift.birthplace)$
     \vspace{\baselineskip}
     \large{geboren te $proefschrift.birthplace$ \\
     in $proefschrift.birthyear$}
+$endif$
 \end{center}
 $endif$
 %% End: Proefschrift %%
@@ -485,21 +487,29 @@ $endif$
 \vfill
 \begin{flushleft}
 \line(1,0){225} \\ %%%% Change colour of line to match chapters %%%%
-\textbf{Front cover image:} $cover-caption$ \\[0.5cm]
-$if(funding)$\textbf{Funding:} $funding$ $endif$
+\textbf{Front cover image:} $cover-caption$ \\[0.4cm]
+$if(funding-statement)$\textbf{Funding:} $funding-statement$ $endif$
 \end{flushleft}
 \endgroup
 %% End: promotor and committee page %%
 
-$if(has-frontmatter)$
-\frontmatter
-$endif$
-$if(title)$
-$if(beamer)$
-\frame{\titlepage}
-$else$
-\maketitle
-$endif$
+\clearpage
+\thispagestyle{empty}
+\vspace*{3cm}
+\hfill\textit{En bar røv at trutte i}
+\par
+\hfill\vspace*{4cm} Jan Bartholdy
+\vspace*{\fill}
+
+%$if(has-frontmatter)$
+%\frontmatter
+%$endif$
+%$if(title)$
+%$if(beamer)$
+%\frame{\titlepage}
+%$else$
+%\maketitle
+%$endif$
 $if(abstract)$
 \begin{abstract}
 $abstract$
@@ -541,9 +551,9 @@ $endif$
 $if(linestretch)$
 \setstretch{$linestretch$}
 $endif$
-$if(has-frontmatter)$
-\mainmatter
-$endif$
+%$if(has-frontmatter)$
+%\mainmatter
+%$endif$
 $body$
 
 $if(has-frontmatter)$
