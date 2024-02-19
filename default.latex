@@ -546,7 +546,7 @@ $if(proefschrift)$
     op gezag van Rector Magnificus $proefschrift.rector$, \\
     volgens besluit van het College voor Promoties \\
     te verdedigen op $proefschrift.day$ $proefschrift.date$ \\
-    klokke $time$ uur \\[1.5cm]
+    klokke $proefschrift.time$ uur \\[1.5cm]
     door} \\[1.5cm]
     \Large{$author$}\par
 $if(proefschrift.birthplace)$
@@ -565,11 +565,12 @@ $endif$
 \noindent\begin{tabular}{p{8em} l}
     \large
     \textbf{Promotor} $for(promotor)$ & \large $promotor.name$ $if(promotor.affiliation)$($copromotor.affiliation$)$endif$ \\ $endfor$
-    \rule{0pt}{4ex}\large\textbf{Co-Promotor} $for(copromotor)$ & \large $copromotor.name$ $if(copromotor.affiliation)$ \\
+    \rule{0pt}{4ex}\large\textbf{Second} \\ \large\textbf{Promotor} $for(copromotor)$ & \large $copromotor.name$ $if(copromotor.affiliation)$ \\
     & \indent\textit{$copromotor.affiliation$}$endif$ \\ $endfor$
     \large
-    \rule{0pt}{8ex}\textbf{Committee} $for(committee)$ & \rule{0pt}{4ex}\large $committee.name$ $if(committee.affiliation)$ \\
-    & \indent\textit{$committee.affiliation$}$endif$ \\ $endfor$
+    \rule{0pt}{8ex}\textbf{Committee} $for(committee)$ & \rule{0pt}{4ex}\large $committee.name$ 
+    $for(committee.affiliation)$ \\[0.2mm]
+    & \indent\textit{$committee.affiliation$} $endfor$ \\ $endfor$
 \end{tabular}
 
 \begingroup
@@ -577,23 +578,16 @@ $endif$
 \vfill
 \begin{flushleft}
 \line(1,0){225} \\ %%%% Change colour of line to match chapters %%%%
-\textbf{Front cover image:} $cover-caption$ \\[0.4cm]
-$if(funding-statement)$\textbf{Funding:} $funding-statement$ $endif$
+\textbf{Cover:} $cover-caption$ \\[0.4cm]
+$if(funding-statement)$\textbf{Funding:} $funding-statement$ \\[0.4cm] $endif$
+\textbf{Print version:} $print-version$
 \end{flushleft}
 \endgroup
 %% End: promotor and committee page %%
 
-\clearpage
-\thispagestyle{empty}
-\vspace*{3cm}
-\hfill\textit{En bar røv at trutte i}
-\par
-\hfill\vspace*{4cm} Jan Bartholdy
-\vspace*{\fill}
-
-%$if(has-frontmatter)$
-%\frontmatter
-%$endif$
+$if(has-frontmatter)$
+\frontmatter
+$endif$
 %$if(title)$
 %$if(beamer)$
 %\frame{\titlepage}
@@ -641,9 +635,9 @@ $endif$
 $if(linestretch)$
 \setstretch{$linestretch$}
 $endif$
-%$if(has-frontmatter)$
-%\mainmatter
-%$endif$
+$if(has-frontmatter)$
+\mainmatter
+$endif$
 $body$
 
 $if(has-frontmatter)$
