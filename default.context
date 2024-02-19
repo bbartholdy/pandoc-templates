@@ -23,6 +23,7 @@ $endif$
   style=$linkstyle$,
   color=$linkcolor$,
   contrastcolor=$linkcontrastcolor$]
+\setupurl[style=$urlstyle$]
 
 % make chapter, section bookmarks visible when opening document
 \placebookmarks[chapter, section, subsection, subsubsection, subsubsubsection, subsubsubsubsection][chapter, section]
@@ -58,6 +59,16 @@ $endif$
 
 \setupbodyfontenvironment[default][em=italic] % use italic as em, not slanted
 
+$-- set up font fallbacks
+$for(mainfontfallback)$
+\definefallbackfamily[mainface][rm][$mainfontfallback$][range=0x0000-0xFFFF, check=yes, force=no]
+$endfor$
+$for(sansfontfallback)$
+\definefallbackfamily[mainface][ss][$sansfontfallback$][range=0x0000-0xFFFF, check=yes, force=no]
+$endfor$
+$for(monofontfallback)$
+\definefallbackfamily[mainface][tt][$monofontfallback$][range=0x0000-0xFFFF, check=yes, force=no]
+$endfor$
 \definefallbackfamily[mainface][rm][CMU Serif][preset=range:greek, force=yes]
 \definefontfamily[mainface][rm][$if(mainfont)$$mainfont$$else$Latin Modern Roman$endif$]
 \definefontfamily[mainface][mm][$if(mathfont)$$mathfont$$else$Latin Modern Math$endif$]
@@ -79,6 +90,10 @@ $endif$
 \setuphead[subsubsection]      [style=\bf]
 \setuphead[subsubsubsection]   [style=\sc]
 \setuphead[subsubsubsubsection][style=\it]
+
+\definesectionlevels
+   [default]
+   [section, subsection, subsubsection, subsubsubsection, subsubsubsubsection]
 
 $if(headertext)$
 \setupheadertexts$for(headertext)$[$headertext$]$endfor$
@@ -105,10 +120,17 @@ $endif$
 \setupfloat[table][default={here,nonumber}]
 
 \setupxtable[frame=off]
-\setupxtable[head][topframe=on,bottomframe=on]
+\setupxtable[head][topframe=on]
 \setupxtable[body][]
-\setupxtable[foot][bottomframe=on]
+\setupxtable[foot][]
+\setupxtable[lastrow][bottomframe=on]
 
+$if(emphasis-commands)$
+$emphasis-commands$
+$endif$
+$if(highlighting-commands)$
+$highlighting-commands$
+$endif$
 $if(csl-refs)$
 \definemeasure[cslhangindent][1.5em]
 \definenarrower[hangingreferences][left=\measure{cslhangindent}]
