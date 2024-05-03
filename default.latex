@@ -580,7 +580,8 @@ $endif$
 \line(1,0){225} \\ %%%% Change colour of line to match chapters %%%%
 \textbf{Cover:} $cover-caption$ \\[0.4cm]
 $if(funding-statement)$\textbf{Funding:} $funding-statement$ \\[0.4cm] $endif$
-\textbf{Print version:} $print-version$
+$if(print-version)$\textbf{Print version:} $print-version$ \\[0.4cm] $endif$
+$if(printed-by)$ \textbf{Printed by:} $printed-by$ \\[0.4cm] $endif$
 \end{flushleft}
 \endgroup
 %% End: promotor and committee page %%
